@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SignUpForm extends React.Component {
+class CreateUserForm extends React.Component {
   constructor() {
     super()
 
@@ -14,9 +14,9 @@ class SignUpForm extends React.Component {
   }
 
   handleSubmit = (event) => {
-    //this updates the store
     event.preventDefault()
-    this.props.addUser(this.state.user)
+    //this updates the store
+    //this.props.addUser(this.state.user)
     this.setState({
       username: '',
       password: '',
@@ -26,6 +26,7 @@ class SignUpForm extends React.Component {
     })
   }
 
+  // these methods update local state of the controlled form
   updateUsername = (event) => {
     let username = event.target.value
     console.log(username)
@@ -58,27 +59,27 @@ class SignUpForm extends React.Component {
 
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return(
       <div>
         <h3>This application works by getting in touch with you to check in.</h3>
         <h4>Get started by creating an account and adding a little bit of information about the best way to contact you.</h4>
-        <form className="form">
+        <form className="form" onSubmit={this.handleSubmit}>
           <p>Account Details</p>
           <label>Username: </label>
-            <input type="text" name="username" placeholder="Username" onChange={this.updateUsername}/>
+            <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.updateUsername}/>
           <label>Password: </label>
-            <input type="text" name="password" placeholder="Password"/>
+            <input type="text" name="password" placeholder="Password" value={this.state.password} onChange={this.updatePassword}/>
           <label>Confirm Password: </label>
-            <input type="text" name="confirm-password" placeholder="Confirm Password"/>
+            <input type="text" name="confirm-password" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.updateConfirmPassword}/>
           <p>Contact Information</p>
           <p>Please be sure you feel comfortable receiving updates at the phone number and email address you provide. Also, please be sure to input a phone number that can receive SMS messages.</p>
           <label>Email Address: </label>
-            <input type="text" name="email" placeholder="Email Address"/>
+            <input type="text" name="email" placeholder="Email Address" value={this.state.email} onChange={this.updateEmail}/>
           <label>Phone Number: </label>
-            <input type="text" name="phone" placeholder="Phone Number"/>
+            <input type="text" name="phone" placeholder="Phone Number" value={this.state.phone} onChange={this.updatePhone}/>
             <br></br>
-          <input type="submit" name="Submit" />
+          <input type="submit" name="Submit"/>
         </form>
       </div>
     );
@@ -86,4 +87,4 @@ class SignUpForm extends React.Component {
 }
 
 
-export default SignUpForm
+export default CreateUserForm
