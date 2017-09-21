@@ -1,15 +1,16 @@
 export function addUser(data) {
   return function(dispatch){
-    fetch(`http://localhost3000/api/v1/users`, {
+    fetch('http://localhost:3000/api/v1/users', {
       method: 'POST',
+      mode: 'cors',
       body: JSON.stringify({data}),
       headers: {
        'Content-Type' : 'application/json'
      }
     })
     .then((res) => res.json())
-    .then((json) => {
-      dispatch({type: "ADD_USER", payload: json.data})
+    .then((user) => {
+      dispatch({type: "ADD_USER", payload: user})
     })
   }
 }

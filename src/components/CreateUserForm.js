@@ -11,7 +11,7 @@ class CreateUserForm extends React.Component {
       password: '',
       confirmPassword: '',
       email: '',
-      phone: ''
+      phone_number: ''
     }
   }
 
@@ -24,9 +24,8 @@ class CreateUserForm extends React.Component {
       password: '',
       confirmPassword: '',
       email: '',
-      phone: ''
+      phone_number: ''
     })
-    debugger
   }
 
   // these methods update local state of the controlled form
@@ -57,12 +56,12 @@ class CreateUserForm extends React.Component {
   updatePhone = (event) => {
     let phone = event.target.value
     // console.log(phone)
-    this.setState({ phone: phone})
+    this.setState({ phone_number: phone})
   }
 
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return(
       <div>
         <h3>This application works by getting in touch with you to check in.</h3>
