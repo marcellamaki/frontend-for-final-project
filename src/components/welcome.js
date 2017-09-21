@@ -1,3 +1,5 @@
+//make this just a functional component
+
 import React from 'react';
 
 class Welcome extends React.Component {

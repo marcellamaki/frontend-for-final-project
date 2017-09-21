@@ -1,8 +1,10 @@
 import React from 'react';
+import { addUser } from '../actions/users'
+import { connect } from 'react-redux'
 
 class CreateUserForm extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       username: '',
@@ -16,7 +18,7 @@ class CreateUserForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault()
     //this updates the store
-    //this.props.addUser(this.state.user)
+    this.props.addUser(this.state)
     this.setState({
       username: '',
       password: '',
@@ -24,42 +26,43 @@ class CreateUserForm extends React.Component {
       email: '',
       phone: ''
     })
+    debugger
   }
 
   // these methods update local state of the controlled form
   updateUsername = (event) => {
     let username = event.target.value
-    console.log(username)
+    // console.log(username)
     this.setState({ username: username})
   }
 
   updatePassword = (event) => {
     let password = event.target.value
-    console.log(password)
+    // console.log(password)
     this.setState({ password: password})
   }
 
   updateConfirmPassword = (event) => {
     let confirmPassword = event.target.value
-    console.log(confirmPassword)
+    // console.log(confirmPassword)
     this.setState({ confirmPassword: confirmPassword})
   }
 
   updateEmail = (event) => {
     let email = event.target.value
-    console.log(email)
+    // console.log(email)
     this.setState({ email: email})
   }
 
   updatePhone = (event) => {
     let phone = event.target.value
-    console.log(phone)
+    // console.log(phone)
     this.setState({ phone: phone})
   }
 
 
   render() {
-    // console.log(this.state)
+    console.log(this.props)
     return(
       <div>
         <h3>This application works by getting in touch with you to check in.</h3>
@@ -79,12 +82,25 @@ class CreateUserForm extends React.Component {
           <label>Phone Number: </label>
             <input type="text" name="phone" placeholder="Phone Number" value={this.state.phone} onChange={this.updatePhone}/>
             <br></br>
-          <input type="submit" name="Submit"/>
+          <input type="submit" name="submit"/>
         </form>
       </div>
     );
   }
 }
 
+function mapStatetoProps(state) {
+    return {
+      users: state.users
+    }
+}
 
-export default CreateUserForm
+function mapDispatchToProps(dispatch) {
+  return {
+    addUser: (user) => {
+      dispatch(addUser(user))
+    }
+  }
+}
+
+export default connect(mapStatetoProps, mapDispatchToProps)(CreateUserForm)

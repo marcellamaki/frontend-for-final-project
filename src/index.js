@@ -7,10 +7,11 @@ import { createStore, applyMiddleware } from 'redux';
 import usersReducer from './reducers/usersReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+// import CreateUserForm from './components/CreateUserForm'
 
 
 const store = createStore(usersReducer, applyMiddleware(thunk))
-console.log(store)
+console.log(store.getState())
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();
