@@ -26,6 +26,7 @@ class CreateUserForm extends React.Component {
       email: '',
       phone_number: ''
     })
+    // console.log(this.props)
   }
 
   // these methods update local state of the controlled form
@@ -54,9 +55,9 @@ class CreateUserForm extends React.Component {
   }
 
   updatePhone = (event) => {
-    let phone = event.target.value
+    let phone_number = event.target.value
     // console.log(phone)
-    this.setState({ phone_number: phone})
+    this.setState({ phone_number: phone_number})
   }
 
 
@@ -79,7 +80,7 @@ class CreateUserForm extends React.Component {
           <label>Email Address: </label>
             <input type="text" name="email" placeholder="Email Address" value={this.state.email} onChange={this.updateEmail}/>
           <label>Phone Number: </label>
-            <input type="text" name="phone" placeholder="Phone Number" value={this.state.phone} onChange={this.updatePhone}/>
+            <input type="text" name="phone_number" placeholder="Phone Number" value={this.state.phone_number} onChange={this.updatePhone}/>
             <br></br>
           <input type="submit" name="submit"/>
         </form>

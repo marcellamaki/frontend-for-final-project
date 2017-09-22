@@ -24,7 +24,6 @@ class LoginForm extends React.Component {
           passwordInput: ""
         })
         localStorage.setItem("token", user.jwt)
-        this.props.history.replace("/home")
       })
 
   }
