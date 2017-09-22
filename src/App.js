@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
-import Welcome from './components/welcome.js'
 import CreateUserForm from './components/CreateUserForm.js'
 import CreateQuestionForm from './components/CreateQuestionForm.js'
+import LoginForm from './components/LoginForm.js'
+import { withRouter } from 'react-router';
+import { Route, Link } from 'react-router-dom';
 
 class App extends Component {
 
   render() {
     return (
-      <div className="welcome">
-        <p>Hello World!</p>
-        <Welcome />
-        <CreateUserForm />
-        <CreateQuestionForm />
+      <div>
+        <Route path='/login' render={() => <LoginForm />} />
+        <Route path='/signup' render={() => <CreateUserForm />} />
+        <Route path='/question/new' render={() => <CreateQuestionForm />} />
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
