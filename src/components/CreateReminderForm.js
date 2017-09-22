@@ -29,27 +29,26 @@ class CreateReminderForm extends React.Component {
   }
 
   // these methods update local state of the controlled form
-  updateUsername = (event) => {
+  updateQuestion = (event) => {
     let question = event.target.value
     // console.log(username)
     this.setState({ question: question})
   }
 
-  updatePassword = (event) => {
+  updateAnswer = (event) => {
     let answer = (event.target.value === "true")
-    // console.log(password)
     this.setState({ answer: answer})
+    console.log(answer)
   }
 
   updateReminder = (event) => {
     let reminder = event.target.value
-    // console.log(email)
+    console.log(reminder)
     this.setState({ reminder: reminder})
   }
 
   updateReminderTime = (event) => {
     let reminder_time = event.target.value
-    // console.log(phone)
     this.setState({ reminder_time: reminder_time})
   }
 
@@ -58,41 +57,30 @@ class CreateReminderForm extends React.Component {
     // console.log(this.props)
     return(
       <div>
-        <h3>Add a custom question, answer, and reminder to your list.</h3>
-        <form className="form" onSubmit={this.handleSubmit}
-          <label>Question: </label>
-            <input type="text" name="question" placeholder="Question" value={this.state.question} onChange={this.updateQuestion}/>
-            <label class="switch">When I'm doing well, my answer to this question is:</label>
-              <input type="checkbox"/>
-              <span class="slider"></span>
-          <label>Confirm Password: </label>
-            <input type="text" name="confirm-password" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.updateConfirmPassword}/>
-          <p>Contact Information</p>
-          <p>Please be sure you feel comfortable receiving updates at the phone number and email address you provide. Also, please be sure to input a phone number that can receive SMS messages.</p>
-          <label>Email Address: </label>
-            <input type="text" name="email" placeholder="Email Address" value={this.state.email} onChange={this.updateEmail}/>
-          <label>Phone Number: </label>
-            <input type="text" name="phone" placeholder="Phone Number" value={this.state.phone} onChange={this.updatePhone}/>
+        <form className="form" onSubmit={this.handleSubmit}>
+          <label>When my answer indicates that I'm not doing well and need a little help, please use the following reminder: </label>
+            <input type="text" name="confirm-password" placeholder="Reminder" value={this.state.reminder} onChange={this.updateReminder}/> <br></br><br></br>
+          <label>Please include the time of day you would like to receive this reminder in 24:00 time. For example, 7:15 P.M. would be 19:15.  </label>
+            <input type="text" name="email" placeholder="HH:MM" value={this.state.reminderTime} onChange={this.updateReminderTime}/><br></br><br></br>
             <br></br>
-          <input type="submit" name="submit"/>
         </form>
       </div>
     );
   }
 }
 
-function mapStatetoProps(state) {
+function mapStateToProps(state) {
     return {
-      users: state.users
+      reminders: state.reminders
     }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    addUser: (user) => {
-      dispatch(addUser(user))
+    addReminder: (reminder) => {
+      dispatch(addReminder(reminder))
     }
   }
 }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(CreateReminderForm)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateReminderForm)

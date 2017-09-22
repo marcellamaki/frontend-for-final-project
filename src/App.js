@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Welcome from './components/welcome.js'
 import CreateUserForm from './components/CreateUserForm.js'
+import CreateQuestionForm from './components/CreateQuestionForm.js'
 
 class App extends Component {
 
@@ -11,6 +12,7 @@ class App extends Component {
         <p>Hello World!</p>
         <Welcome />
         <CreateUserForm />
+        <CreateQuestionForm />
       </div>
     );
   }
