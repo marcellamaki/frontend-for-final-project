@@ -10,7 +10,7 @@ export function addUser(data) {
     })
     .then((res) => res.json())
     .then((user) => {
-      dispatch({type: "ADD_USER", payload: user})
+      dispatch({type: "ADD_USER", payload: user}, localStorage.setItem('jwt', user.jwt))
     })
   }
 }
