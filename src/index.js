@@ -8,8 +8,7 @@ import usersReducer from './reducers/usersReducer';
 import remindersReducer from './reducers/remindersReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { withRouter } from 'react-router';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Welcome from './components/welcome.js'
 // import CreateUserForm from './components/CreateUserForm'
 

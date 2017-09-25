@@ -12,8 +12,6 @@ class CreateQuestionForm extends React.Component {
       answer: true,
       showReminderForm: false
     }
-
-    this.onButtonClick = this.onButtonClick.bind(this);
   }
 
   onButtonClick = (event) => {
@@ -23,24 +21,24 @@ class CreateQuestionForm extends React.Component {
     })
   }
 
-  // handleSubmit = (event) => {
-  //   event.preventDefault()
-  //   //this updates the store
-  //   this.props.addReminder(this.state)
-  //   this.setState({
-  //     question: '',
-  //     answer: '',
-  //     reminder: '',
-  //     active: '',
-  //     reminder_time: ''
-  //   })
-  // }
+  handleSubmit = (event) => {
+    event.preventDefault()
+    //this updates the store
+    this.props.addQuestion(this.state)
+    this.setState({
+      text: '',
+      answer: '',
+      reminder: '',
+      active: '',
+      reminder_time: ''
+    })
+  }
 
   // these methods update local state of the controlled form
-  updateQuestion = (event) => {
-    let question = event.target.value
+  updateText = (event) => {
+    let text = event.target.value
     // console.log(username)
-    this.setState({ question: question})
+    this.setState({ text: text})
   }
 
   updateAnswer = (event) => {
@@ -66,33 +64,33 @@ class CreateQuestionForm extends React.Component {
     return(
       <div>
         <h3>Add a custom check-in, response, and reminder to your list.</h3>
-        <form className="form" onSubmit={this.handleSubmit}>
+        <form className="form">
             <label>Check In: </label>
-              <input type="text" name="question" placeholder="Check in" value={this.state.question} onChange={this.updateQuestion}/><br></br><br></br>
+              <input type="text" name="question" placeholder="Check in" value={this.state.question} onChange={this.updateText}/><br></br><br></br>
             <label>When I'm doing well, my answer to this check-in is:</label>
               <input type="radio" name="gender" value="true" onChange={this.updateAnswer}/>Yes
               <input type="radio" name="gender" value="false" onChange={this.updateAnswer}/>No<br></br>
               <br></br><br></br>
-            <input type="submit" name="submit" value="Save Check-In" onClick={this.onButtonClick}/>
+            <input type="button" value="Save Check-In" onClick={this.onButtonClick}/>
           </form><br></br><br></br>
-          {this.state.showComponent ? <CreateReminderForm /> : null}
+          {this.state.showComponent ? <CreateReminderForm updateReminder={this.updateReminder} updateReminderTime={this.updateReminderTime}/> : null}
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-    return {
-      question: state.questions
-    }
-}
+  function mapStateToProps(state) {
+      return {
+        question: state.questions
+      }
+  }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addQuestion: (question) => {
-    dispatch(addQuestion(question))
+  function mapDispatchToProps(dispatch) {
+    return {
+      addQuestion: (question) => {
+        dispatch(addQuestion(question))
+      }
     }
   }
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateQuestionForm)

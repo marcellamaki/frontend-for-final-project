@@ -5,65 +5,28 @@ import { connect } from 'react-redux'
 class CreateReminderForm extends React.Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      question: '',
-      answer: true,
-      reminder: '',
-      active: true,
-      reminder_time: ''
-    }
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
-    //this updates the store
-    this.props.addReminder(this.state)
-    this.setState({
-      question: '',
-      answer: '',
-      reminder: '',
-      active: '',
-      reminder_time: ''
-    })
+    this.props.updateReminder()
+    this.props.updateReminderTime()
   }
-
-  // these methods update local state of the controlled form
-  updateQuestion = (event) => {
-    let question = event.target.value
-    // console.log(username)
-    this.setState({ question: question})
-  }
-
-  updateAnswer = (event) => {
-    let answer = (event.target.value === "true")
-    this.setState({ answer: answer})
-    console.log(answer)
-  }
-
-  updateReminder = (event) => {
-    let reminder = event.target.value
-    console.log(reminder)
-    this.setState({ reminder: reminder})
-  }
-
-  updateReminderTime = (event) => {
-    let reminder_time = event.target.value
-    this.setState({ reminder_time: reminder_time})
-  }
-
 
   render() {
-    // console.log(this.props)
+    console.log(this.props)
     return(
       <div>
         <form className="form" onSubmit={this.handleSubmit}>
           <label>When my answer indicates that I'm not doing well and need a little help, please use the following reminder: </label>
-            <input type="text" name="confirm-password" placeholder="Reminder" value={this.state.reminder} onChange={this.updateReminder}/> <br></br><br></br>
+            <input type="text" name="confirm-password" placeholder="Reminder" value={this.props.reminder} onChange={this.props.updateReminder}/> <br></br><br></br>
           <label>Please include the time of day you would like to receive this reminder in 24:00 time. For example, 7:15 P.M. would be 19:15.  </label>
-            <input type="text" name="email" placeholder="HH:MM" value={this.state.reminderTime} onChange={this.updateReminderTime}/><br></br><br></br>
+            <input type="text" name="email" placeholder="HH:MM" value={this.props.reminderTime} onChange={this.props.updateReminderTime}/><br></br><br></br>
             <br></br>
-        </form>
+            <input type="submit" name="submit" value="Add Reminder"/>
+        </form><br></br><br></br>
+        <h3>My Reminders</h3>
+        
       </div>
     );
   }
