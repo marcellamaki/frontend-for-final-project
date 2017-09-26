@@ -13,8 +13,6 @@ class LoginForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log(this.props.history)
-
     const userParams = {
       username: this.state.usernameInput,
       password: this.state.passwordInput
@@ -24,11 +22,9 @@ class LoginForm extends React.Component {
           usernameInput: "",
           passwordInput: ""
         })
-        // this.props.history.replace("/home")
   }
 
   handleUsernameChange = (event) => {
-
     this.setState({
       usernameInput: event.target.value
     })
@@ -39,8 +35,8 @@ class LoginForm extends React.Component {
       passwordInput: event.target.value
     })
   }
+  
   render() {
-    // console.log(this.props)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

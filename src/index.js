@@ -14,7 +14,7 @@ import Welcome from './components/welcome.js'
 
 const rootReducer = combineReducers({users: usersReducer, reminders: remindersReducer})
 const store = createStore(rootReducer, applyMiddleware(thunk))
-console.log(store.getState())
+// console.log(store.getState())
 
 ReactDOM.render(
     <Provider store={store}>
