@@ -1,6 +1,6 @@
 
 
-function usersReducer(state = {list: []}, action) {
+function usersReducer(state = {list: [], currentUser: {}}, action) {
 
   switch (action.type) {
     case "ADD_USER":
@@ -8,9 +8,11 @@ function usersReducer(state = {list: []}, action) {
       // console.log (obj)
       return obj
     case "FIND_USER":
-      console.log(action)
-      localStorage.setItem('token', action.payload.jwt)
-      return state
+        console.log("payload", action.payload)
+        localStorage.setItem('token', action.payload.jwt)
+        const currentUser = Object.assign({}, state, {currentUser: action.payload.user})
+        console.log(currentUser)
+        return currentUser
 
     case "REMOVE_USER":
       const filteredArray = state.users.filter((user) => user.id !== action.payload.id)

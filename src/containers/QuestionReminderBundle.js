@@ -2,11 +2,12 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import AddQuestionForm from '../components/AddQuestionForm';
 import AddReminderForm from '../components/AddReminderForm';
+import { connect } from 'react-redux'
 
 class QuestionReminderBundle extends React.Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       checkInText: '',
@@ -56,9 +57,10 @@ class QuestionReminderBundle extends React.Component {
 
 
   render() {
+    console.log("current props:", this.props)
     return(
       <div>
-        <AddQuestionForm name={this.state.questioName} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+        <AddQuestionForm text={this.state.checkInText} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
         <br></br>
         <AddReminderForm currentQuestions={this.state.allQuestions} />
 
@@ -67,4 +69,11 @@ class QuestionReminderBundle extends React.Component {
   }
 }
 
-export default QuestionReminderBundle;
+function mapStatetoProps(state) {
+  console.log("state in question container", state)
+    return {
+      currentUser: state.users.currentUser
+    }
+}
+
+export default connect(mapStatetoProps)(QuestionReminderBundle);

@@ -16,7 +16,6 @@ export function addUser(data) {
 }
 
 export function findUser(data, history) {
-  console.log(history)
   return function(dispatch) {
     const url = `http://localhost:3000/api/v1/login`
     fetch(url, {
@@ -29,10 +28,14 @@ export function findUser(data, history) {
     })
     .then((res) => res.json())
     .then((user) => {
-      dispatch({type: "FIND_USER", payload: user}, console.log(user))
-    })
-    console.log(history)
-    history.history.push('/questions/new')
+      if (user.error) {
+        console.log("Error!")
+      } else {
+        console.log("Found User!")
+      dispatch({type: "FIND_USER", payload: user})
+    }})
+    .then((redirect) => history.history.push('/questions/new'))
+    // console.log(history)
   }
 
 }

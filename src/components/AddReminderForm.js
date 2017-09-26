@@ -57,10 +57,11 @@ class AddReminderForm extends React.Component {
   }
 
   render() {
-    console.log(this.props.currentQuestions)
+    // console.log(this.props.currentQuestions)
     if (this.props.currentQuestions.length === 0) {
       return <div></div>
     } else {
+      console.log(this.props)
       const currentQuestions = this.props.currentQuestions.map((question, index) =>
         <QuestionDropdown question={question} key={index}/>)
       return (

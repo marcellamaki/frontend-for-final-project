@@ -53,12 +53,6 @@ class LoginForm extends React.Component {
   }
 };
 
-function mapStatetoProps(state) {
-
-    return {
-      user: state.user
-    }
-}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -69,4 +63,4 @@ function mapDispatchToProps(dispatch) {
 
 }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(LoginForm)
+export default connect(null, mapDispatchToProps)(LoginForm)
