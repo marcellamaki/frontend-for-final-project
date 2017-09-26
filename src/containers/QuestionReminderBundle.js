@@ -41,25 +41,7 @@ class QuestionReminderBundle extends React.Component {
       }))
   }
 
-  handleCheckInSubmit = (event) => {
-  	event.preventDefault()
-  	const data = {
-  		text: this.state.checkInText,
-      user_id: this.props.currentUser.id
-  	}
-
-  	fetch('http://localhost:3000/api/v1/questions', {
-  		method: 'POST',
-  		body: JSON.stringify({data}),
-  		headers: {
-  			"Content-Type": "application/json"
-  		}
-  	}).then(res => res.json())
-  	.then(res => this.setState({
-      allQuestions: res
-    }))
-    // console.log(this.state.allQuestions)
-  }
+  //handle controlled forms
 
   handleChange = (event) => {
     this.setState({
@@ -68,16 +50,37 @@ class QuestionReminderBundle extends React.Component {
   }
 
   handleDropdownChange = (event) => {
+    console.log("changing the dropdown")
     this.setState({
       selectedCheckIn: event.target.value
     })
   }
 
+  updateReminder = (event) => {
+    console.log("changing reminder")
+    const reminder = event.target.value
+    this.setState({
+      reminderText: reminder
+    })
+  }
+
+  updateReminderTime = (event) => {
+    console.log("changing reminderTime")
+    const reminderTime = event.target.value
+    this.setState({
+      reminderTime: reminderTime
+    })
+  }
+
+  // managing submission of child components
+
   handleFormSubmit = (event) => {
+    console.log("Starting to submit")
     event.preventDefault()
     const data = {
       question_id: this.state.selectedCheckIn,
-      answer: this.state.answer
+      active: true,
+      message: this.state.reminderText
     }
 
     fetch('http://localhost:3000/api/v1/reminders', {
@@ -90,13 +93,25 @@ class QuestionReminderBundle extends React.Component {
       .then(res => console.log("this worked and I got back:", res))
   }
 
-  checkValue = (event) => {
-    const answer = (event.target.value === 'true')
-    console.log(answer)
-    this.setState({
-      answer:answer
-    })
 
+  handleCheckInSubmit = (event) => {
+    event.preventDefault()
+    const data = {
+      text: this.state.checkInText,
+      user_id: this.props.currentUser.id
+    }
+
+    fetch('http://localhost:3000/api/v1/questions', {
+      method: 'POST',
+      body: JSON.stringify({data}),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => res.json())
+    .then(res => this.setState({
+      allQuestions: res
+    }))
+    // console.log(this.state.allQuestions)
   }
 
 
@@ -116,7 +131,7 @@ class QuestionReminderBundle extends React.Component {
              {currentUserQuestions}
            </select>
          </form>
-         <AddReminderForm currentQuestions={myQuestions} reminder={this.state.reminderText} onSubmit={this.handleFormSubmit} checkValue={this.props.checkValue}/>
+         <AddReminderForm currentQuestions={myQuestions} reminderText={this.state.reminderText} reminderTime={this.state.reminderTime} handleReminderChange={this.updateReminder} handleReminderTimeChange={this.updateReminderTime} handleSubmit={this.handleFormSubmit} />
        </div>
      )
    }
