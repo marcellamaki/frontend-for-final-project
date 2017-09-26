@@ -13,13 +13,13 @@ class LoginForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-
+    console.log(this.props.history)
 
     const userParams = {
       username: this.state.usernameInput,
       password: this.state.passwordInput
     }
-    this.props.findUser(userParams)
+    this.props.findUser(userParams, this.props.history)
         this.setState({
           usernameInput: "",
           passwordInput: ""
@@ -56,14 +56,14 @@ class LoginForm extends React.Component {
 function mapStatetoProps(state) {
 
     return {
-      users: state.users
+      user: state.user
     }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    findUser: (user) => {
-      dispatch(findUser(user))
+    findUser: (user, history) => {
+      dispatch(findUser(user, history))
     }
   }
 

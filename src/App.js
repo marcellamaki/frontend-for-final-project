@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route path='/login' render={() => <LoginForm />} />
+        <Route path='/login' render={(history) => <LoginForm history={history}/>} />
         <Route path='/signup' render={() => <CreateUserForm />} />
         <Route path='/questions/new' render={() => <QuestionReminderBundle />} />
       </div>

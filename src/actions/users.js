@@ -15,7 +15,8 @@ export function addUser(data) {
   }
 }
 
-export function findUser(data) {
+export function findUser(data, history) {
+  console.log(history)
   return function(dispatch) {
     const url = `http://localhost:3000/api/v1/login`
     fetch(url, {
@@ -30,7 +31,10 @@ export function findUser(data) {
     .then((user) => {
       dispatch({type: "FIND_USER", payload: user}, console.log(user))
     })
+    console.log(history)
+    history.history.push('/questions/new')
   }
+
 }
 
 export function deleteUser(user) {
