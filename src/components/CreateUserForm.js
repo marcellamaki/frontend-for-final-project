@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { addUser } from '../actions/users'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 class CreateUserForm extends React.Component {
   constructor(props) {
@@ -17,7 +19,7 @@ class CreateUserForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    //this updates the store
+    console.log( "Props", this.props, "state", this.state)
     this.props.addUser(this.state)
     this.setState({
       username: '',
@@ -26,7 +28,6 @@ class CreateUserForm extends React.Component {
       email: '',
       phone_number: ''
     })
-    // console.log(this.props)
   }
 
   // these methods update local state of the controlled form
@@ -55,9 +56,9 @@ class CreateUserForm extends React.Component {
   }
 
   updatePhone = (event) => {
-    let phone_number = event.target.value
+    let phone = event.target.value
     // console.log(phone)
-    this.setState({ phone_number: phone_number})
+    this.setState({ phone_number: phone})
   }
 
 
@@ -80,16 +81,18 @@ class CreateUserForm extends React.Component {
           <label>Email Address: </label>
             <input type="text" name="email" placeholder="Email Address" value={this.state.email} onChange={this.updateEmail}/>
           <label>Phone Number: </label>
-            <input type="text" name="phone_number" placeholder="Phone Number" value={this.state.phone_number} onChange={this.updatePhone}/>
+            <input type="text" name="phone" placeholder="Phone Number" value={this.state.phone} onChange={this.updatePhone}/>
             <br></br>
-          <input type="submit" name="submit"/>
+          <input type="submit"></input>
         </form>
       </div>
     );
+
   }
 }
 
 function mapStatetoProps(state) {
+
     return {
       users: state.users
     }
@@ -101,6 +104,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(addUser(user))
     }
   }
+
 }
 
 export default connect(mapStatetoProps, mapDispatchToProps)(CreateUserForm)

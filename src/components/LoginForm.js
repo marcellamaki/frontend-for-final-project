@@ -1,5 +1,7 @@
 import React from 'react'
 import Auth from '../adapters/auth'
+import { findUser } from '../actions/users'
+import { connect } from 'react-redux'
 
 
 class LoginForm extends React.Component {
@@ -17,15 +19,12 @@ class LoginForm extends React.Component {
       username: this.state.usernameInput,
       password: this.state.passwordInput
     }
-  Auth.login(userParams)
-      .then((user) => {
+    this.props.findUser(userParams)
         this.setState({
           usernameInput: "",
           passwordInput: ""
         })
-        localStorage.setItem("token", user.jwt)
-      })
-
+        // this.props.history.replace("/home")
   }
 
   handleUsernameChange = (event) => {
@@ -41,19 +40,33 @@ class LoginForm extends React.Component {
     })
   }
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <h4>Log In</h4>
-          <input type="text" onChange={this.handleUsernameChange} value={this.state.usernameInput}/><br></br><br></br>
-          <input type="password" onChange={this.handlePasswordChange} value={this.state.passwordInput} /> <br></br><br></br>
-          <input type="submit" value="login"/>
+          <input type="text" onChange={this.handleUsernameChange} value={this.state.usernameInput}/><br></br>
+          <input type="password" onChange={this.handlePasswordChange} value={this.state.passwordInput} /><br></br>
+          <input type="submit" value="Login"/>
         </form>
       </div>
     )
   }
+};
+
+function mapStatetoProps(state) {
+
+    return {
+      users: state.users
+    }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    findUser: (user) => {
+      dispatch(findUser(user))
+    }
+  }
 
-export default LoginForm
+}
+
+export default connect(mapStatetoProps, mapDispatchToProps)(LoginForm)

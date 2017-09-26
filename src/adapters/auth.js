@@ -1,6 +1,6 @@
 class Auth {
-  static login(data) {
-    const userJSON = JSON.stringify(data)
+  static login(userParams) {
+    const userJSON = JSON.stringify(userParams)
     return fetch('http://localhost:3000/api/v1/login',{
       method: 'post',
       body: userJSON,
@@ -9,7 +9,8 @@ class Auth {
         "Accept":"application/json"
       }
     })
-      .then(res => res.json())
+    .then((res) => res.json())
+    .then((user) => console.log(user))
   }
 
   static signup() {

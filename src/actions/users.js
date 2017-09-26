@@ -10,7 +10,25 @@ export function addUser(data) {
     })
     .then((res) => res.json())
     .then((user) => {
-      dispatch({type: "ADD_USER", payload: user}, localStorage.setItem('jwt', user.jwt))
+      dispatch({type: "ADD_USER", payload: user}, console.log(user))
+    })
+  }
+}
+
+export function findUser(data) {
+  return function(dispatch) {
+    const url = `http://localhost:3000/api/v1/login`
+    fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({data}),
+      headers: {
+       'Content-Type' : 'application/json'
+     }
+    })
+    .then((res) => res.json())
+    .then((user) => {
+      dispatch({type: "FIND_USER", payload: user}, console.log(user))
     })
   }
 }
@@ -21,3 +39,6 @@ export function deleteUser(user) {
     payload: {user}
   }
 }
+
+
+// , localStorage.setItem('jwt', user.jwt)

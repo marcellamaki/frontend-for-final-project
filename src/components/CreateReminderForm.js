@@ -25,8 +25,7 @@ class CreateReminderForm extends React.Component {
             <br></br>
             <input type="submit" name="submit" value="Add Reminder"/>
         </form><br></br><br></br>
-        <h3>My Reminders</h3>
-        
+        <h3>My Remind</h3>
       </div>
     );
   }
