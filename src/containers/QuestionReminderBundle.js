@@ -4,6 +4,8 @@ import AddQuestionForm from '../components/AddQuestionForm';
 import AddReminderForm from '../components/AddReminderForm';
 import { connect } from 'react-redux';
 import QuestionDropdown from '../components/QuestionDropdown'
+import { addQuestion } from '../actions/questions'
+import { addReminder} from '../actions/reminders'
 
 class QuestionReminderBundle extends React.Component {
 
@@ -82,15 +84,7 @@ class QuestionReminderBundle extends React.Component {
       active: true,
       message: this.state.reminderText
     }
-
-    fetch('http://localhost:3000/api/v1/reminders', {
-      method: 'POST',
-      body: JSON.stringify({data}),
-      headers: {
-  			"Content-Type": "application/json"
-  		}
-    }).then(res => res.json())
-      .then(res => console.log("this worked and I got back:", res))
+    this.props.addReminder(data)
   }
 
 
@@ -100,24 +94,13 @@ class QuestionReminderBundle extends React.Component {
       text: this.state.checkInText,
       user_id: this.props.currentUser.id
     }
-
-    fetch('http://localhost:3000/api/v1/questions', {
-      method: 'POST',
-      body: JSON.stringify({data}),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(res => res.json())
-    .then(res => this.setState({
-      allQuestions: res
-    }))
-    // console.log(this.state.allQuestions)
+    this.props.addQuestion(data)
   }
 
 
   render() {
     const myQuestions = this.state.allQuestions
-    // console.log(myQuestions)
+    console.log(this.props)
     if (this.state.allQuestions.length === 0) {
       return <div>  <AddQuestionForm text={this.state.checkInText} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/> </div>
     } else {
@@ -139,10 +122,23 @@ class QuestionReminderBundle extends React.Component {
 }
 
 function mapStatetoProps(state) {
-  // console.log("state in question container", state)
+  console.log(state)
     return {
-      currentUser: state.users.currentUser
+      currentUser: state.users.currentUser,
+      
     }
 }
 
-export default connect(mapStatetoProps)(QuestionReminderBundle);
+function mapDispatchToProps(dispatch) {
+  return {
+    addQuestion: (question) => {
+      dispatch(addQuestion(question))
+    },
+    addReminder: (reminder) => {
+        dispatch(addReminder(reminder))
+    }
+  }
+}
+
+
+export default connect(mapStatetoProps, mapDispatchToProps)(QuestionReminderBundle);

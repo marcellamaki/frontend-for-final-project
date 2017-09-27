@@ -1,4 +1,5 @@
 export function addQuestion(data) {
+  console.log("data being sent to action:", data)
   return function(dispatch){
     fetch('http://localhost:3000/api/v1/questions', {
       method: 'POST',
@@ -10,14 +11,7 @@ export function addQuestion(data) {
     })
     .then((res) => res.json())
     .then((question) => {
-      dispatch({type: "ADD_QUESTION", payload: question}, console.log(question))
+      dispatch({type: "ADD_QUESTION", payload: question}, console.log("This worked and you got back:", question))
     })
-  }
-}
-
-export function deleteQuestion(question) {
-  return {
-    type: "DELETE_QUESTION",
-    payload: {question}
   }
 }

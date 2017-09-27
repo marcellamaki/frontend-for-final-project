@@ -2,22 +2,13 @@ export function addReminder(data) {
   return function(dispatch){
     fetch('http://localhost:3000/api/v1/reminders', {
       method: 'POST',
-      mode: 'cors',
       body: JSON.stringify({data}),
       headers: {
-       'Content-Type' : 'application/json'
-     }
+  			"Content-Type": "application/json"
+  		}
+    }).then(res => res.json())
+      .then(res => {
+      dispatch({type: "ADD_REMINDER", payload: res}, console.log("This worked from reminder.js and you got back:", res))
     })
-    .then((res) => res.json())
-    .then((reminder) => {
-      dispatch({type: "ADD_REMINDER", payload: reminder}, console.log(reminder))
-    })
-  }
-}
-
-export function deleteUser(user) {
-  return {
-    type: "DELETE_USER",
-    payload: {user}
   }
 }
