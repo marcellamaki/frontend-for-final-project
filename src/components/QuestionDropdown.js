@@ -1,4 +1,5 @@
 import React from 'react'
+import Select from 'react-select';
 
 class QuestionDropdown extends React.Component {
 	constructor(props){
@@ -10,9 +11,7 @@ class QuestionDropdown extends React.Component {
 	const currentUserQuestions = this.props.questions.map((question, index) => <option key={index} value={question.id}>{question.text}</option>)
 	return (
 		<div>
-			<datalist id="questions">
-				{currentUserQuestions}
-			</datalist>
+			
 		</div>
 	)}
 }

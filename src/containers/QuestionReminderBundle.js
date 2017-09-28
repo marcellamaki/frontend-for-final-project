@@ -3,9 +3,10 @@ import { Route, Link } from 'react-router-dom';
 import AddQuestionForm from '../components/AddQuestionForm';
 import AddReminderForm from '../components/AddReminderForm';
 import { connect } from 'react-redux';
-import QuestionDropdown from '../components/QuestionDropdown'
-import { addQuestion } from '../actions/questions'
-import { addReminder} from '../actions/reminders'
+import QuestionDropdown from '../components/QuestionDropdown';
+import { addQuestion } from '../actions/questions';
+import { addReminder} from '../actions/reminders';
+import Select from 'react-select';
 
 
 class QuestionReminderBundle extends React.Component {

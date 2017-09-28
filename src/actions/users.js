@@ -63,18 +63,20 @@ export function fetchUser() {
 }
 
 
-// export function getUser(jwt) {
-//   return function(dispatch) {
-//     const url = `http://localhost:3000/api/v1/me`
-//     fetch(url, {
-//       headers:{
-//         "Authorization":`Bearer ${jwt}`,
-//         "Accept":"application/json"
-//       }
-//     })
-//     .then((res) => res.json())
-//   }
-// }
+export function saveUserQuestions(data) {
+  return function(dispatch) {
+    console.log("I got to save user questions!")
+    fetch('http://localhost:3000/api/v1/checkin', {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({data}),
+      headers: {
+       'Content-Type' : 'application/json'
+     }
+    })
+    .then((res) => res.json())
+  }
+}
 
 export function deleteUser(user) {
   return {
