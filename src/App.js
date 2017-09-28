@@ -12,6 +12,7 @@ import NavBar from './components/NavBar.js'
 import {fetchUser}  from './actions/users'
 import { connect } from 'react-redux';
 import Auth from './adapters/auth.js'
+import { fetchQuestions } from './actions/questions'
 
 
 class App extends Component {
@@ -21,9 +22,9 @@ class App extends Component {
     // console.log(jwt_decode(localStorage.getItem('token')))
     if(!!localStorage.getItem("token") && Object.keys(this.props.currentUser).length == 0) {
       this.props.fetchUser()
+      console.log(this.props.currentUser)
   }
 }
-
 
 
   loginUser = (userParams) => {
@@ -37,15 +38,6 @@ class App extends Component {
 
     })
   }
-
-  //
-  // handleButtonClick = () => {
-  // Auth.me().then(user => {
-  //   console.log(user)
-  //
-  // })
-  //
-  // }
 
   render() {
     const AuthProfile = authorize(ProfileContainer)
@@ -63,7 +55,7 @@ class App extends Component {
 
 function mapStatetoProps(state){
   return {
-    currentUser: state.users.currentUser
+    currentUser: state.users.currentUser,
   }
 }
 

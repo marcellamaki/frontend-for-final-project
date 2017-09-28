@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 
 class NavBar extends React.Component {
-
-  componentDidMount(){
-
-  }
-
-
-  
+    
   render(){
     return(
       <div className="ui inverted segment">

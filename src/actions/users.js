@@ -56,8 +56,7 @@ export function fetchUser() {
     }
   })
   .then((res) => res.json())
-  .then((res) => {
-      dispatch({type: "SET_USER", payload: res})
+  .then((res) => { dispatch({type: "SET_USER", payload: res})
       //{id: 12, username: "marce".…}
   })
 }

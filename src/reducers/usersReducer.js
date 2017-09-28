@@ -16,7 +16,11 @@ function usersReducer(state = {allUsers: [], currentUser: {}}, action) {
         return currentUser
     case "SET_USER":
       console.log("payload", action.payload)
-      const setUser = Object.assign({}, state, {currentUser: action.payload})
+      const setUser = Object.assign({}, state, {
+        currentUser: action.payload.user,
+        userQuestions: action.payload.questions,
+        userReminders: action.payload.reminders
+      })
       return setUser
     case "REMOVE_USER":
       const filteredArray = state.users.filter((user) => user.id !== action.payload.id)

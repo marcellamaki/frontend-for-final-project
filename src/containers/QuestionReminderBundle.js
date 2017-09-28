@@ -7,6 +7,7 @@ import QuestionDropdown from '../components/QuestionDropdown'
 import { addQuestion } from '../actions/questions'
 import { addReminder} from '../actions/reminders'
 
+
 class QuestionReminderBundle extends React.Component {
 
   constructor(props) {
@@ -20,25 +21,7 @@ class QuestionReminderBundle extends React.Component {
       selectedCheckIn: '',
       answer: true
     }
-
   }
-
-  fetchQuestionList() {
-    const user_id = this.props.currentUser.id
-    console.log(user_id)
-    fetch(`http://localhost:3000/api/v1/questions/${user_id}`, {
-      headers : {
-        method: "GET",
-        'Content-Type': 'application/json'
-       }
-    })
-      .then(res => res.json())
-      .then(res => this.setState({
-        allQuestions: res
-      }))
-  }
-
-  //handle controlled forms
 
   handleChange = (event) => {
     this.setState({
@@ -94,20 +77,14 @@ class QuestionReminderBundle extends React.Component {
 
 
   render() {
-    this.fetchQuestionList()
-    if (this.state.allQuestions === undefined || this.state.allQuestions.length === 0) {
+    console.log(this.props)
+    if (!this.props.questions) {
       return <div>Loading...</div>
     } else {
-      console.log(this.state.allQuestions)
-      // const currentUserQuestions = this.state.allQuestions.map((question, index) => <QuestionDropdown question={question} key={index}/>)
      return(
        <div>
-         <AddQuestionForm text={this.state.checkInText} handleChange={this.handleChange} handleSubmit={this.handleCheckInSubmit}/>
-         <form onChange={this.handleDropdownChange}>
-           <select>
-             <option value="">My Check-Ins</option>
-
-           </select>
+         <form>
+           <QuestionDropdown currentUser={this.props.currentUser} questions={this.props.questions} reminders={this.props.reminders}/>
          </form>
          <AddReminderForm reminderText={this.state.reminderText} reminderTime={this.state.reminderTime} handleReminderChange={this.updateReminder} handleReminderTimeChange={this.updateReminderTime} handleSubmit={this.handleFormSubmit} />
        </div>
@@ -116,11 +93,13 @@ class QuestionReminderBundle extends React.Component {
 }
 }
 
+
 function mapStatetoProps(state) {
-  console.log(state)
+  // console.log(state)
     return {
       currentUser: state.users.currentUser,
-
+      questions: state.users.userQuestions,
+      reminders: state.users.userReminders
     }
 }
 
