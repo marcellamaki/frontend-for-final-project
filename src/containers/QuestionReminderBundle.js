@@ -23,14 +23,9 @@ class QuestionReminderBundle extends React.Component {
 
   }
 
-  componentDidMount() {
-    this.fetchQuestionList()
-    console.log(this.state.allQuestions)
-  }
-
   fetchQuestionList() {
     const user_id = this.props.currentUser.id
-
+    console.log(user_id)
     fetch(`http://localhost:3000/api/v1/questions/${user_id}`, {
       headers : {
         method: "GET",
@@ -99,22 +94,22 @@ class QuestionReminderBundle extends React.Component {
 
 
   render() {
-    const myQuestions = this.state.allQuestions
-    console.log(this.props)
-    if (this.state.allQuestions.length === 0) {
-      return <div>  <AddQuestionForm text={this.state.checkInText} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/> </div>
+    this.fetchQuestionList()
+    if (this.state.allQuestions === undefined || this.state.allQuestions.length === 0) {
+      return <div>Loading...</div>
     } else {
-      const currentUserQuestions = this.state.allQuestions.map((question, index) => <QuestionDropdown question={question} key={index}/>)
+      console.log(this.state.allQuestions)
+      // const currentUserQuestions = this.state.allQuestions.map((question, index) => <QuestionDropdown question={question} key={index}/>)
      return(
        <div>
          <AddQuestionForm text={this.state.checkInText} handleChange={this.handleChange} handleSubmit={this.handleCheckInSubmit}/>
          <form onChange={this.handleDropdownChange}>
            <select>
              <option value="">My Check-Ins</option>
-             {currentUserQuestions}
+
            </select>
          </form>
-         <AddReminderForm currentQuestions={myQuestions} reminderText={this.state.reminderText} reminderTime={this.state.reminderTime} handleReminderChange={this.updateReminder} handleReminderTimeChange={this.updateReminderTime} handleSubmit={this.handleFormSubmit} />
+         <AddReminderForm reminderText={this.state.reminderText} reminderTime={this.state.reminderTime} handleReminderChange={this.updateReminder} handleReminderTimeChange={this.updateReminderTime} handleSubmit={this.handleFormSubmit} />
        </div>
      )
    }
@@ -125,7 +120,7 @@ function mapStatetoProps(state) {
   console.log(state)
     return {
       currentUser: state.users.currentUser,
-      
+
     }
 }
 

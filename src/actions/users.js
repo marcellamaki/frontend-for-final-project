@@ -1,4 +1,5 @@
-export function addUser(data) {
+export function addUser(data, history) {
+  console.log(history)
   return function(dispatch){
     fetch('http://localhost:3000/api/v1/users', {
       method: 'POST',
@@ -10,8 +11,13 @@ export function addUser(data) {
     })
     .then((res) => res.json())
     .then((user) => {
-      dispatch({type: "ADD_USER", payload: user}, console.log(user))
-    })
+      if (user.error) {
+        console.log("Error!")
+      } else {
+        console.log("Added User!")
+      dispatch({type: "ADD_USER", payload: user}, history)
+    }})
+    // .then((redirect) => history.history.push('/questions/new'))
   }
 }
 
@@ -34,11 +40,42 @@ export function findUser(data, history) {
         console.log("Found User!")
       dispatch({type: "FIND_USER", payload: user})
     }})
-    .then((redirect) => history.history.push('/profile'))
+    // .then((redirect) => history.history.push('/profile'))
     // console.log(history)
   }
-
 }
+
+
+export function fetchUser() {
+  const jwtToken = localStorage.getItem("token")
+  return function(dispatch) {
+    fetch('http://localhost:3000/api/v1/getUser',{
+    headers:{
+      "Authorization":`Bearer ${jwtToken}`,
+      "Accept":"application/json"
+    }
+  })
+  .then((res) => res.json())
+  .then((res) => {
+      dispatch({type: "SET_USER", payload: res})
+      //{id: 12, username: "marce".…}
+  })
+}
+}
+
+
+// export function getUser(jwt) {
+//   return function(dispatch) {
+//     const url = `http://localhost:3000/api/v1/me`
+//     fetch(url, {
+//       headers:{
+//         "Authorization":`Bearer ${jwt}`,
+//         "Accept":"application/json"
+//       }
+//     })
+//     .then((res) => res.json())
+//   }
+// }
 
 export function deleteUser(user) {
   return {

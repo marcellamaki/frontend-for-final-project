@@ -1,26 +1,25 @@
 
 import React from 'react';
+import Auth from '../adapters/auth'
 import { addUser } from '../actions/users'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+
 
 class CreateUserForm extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
+  state = {
       username: '',
       password: '',
       confirmPassword: '',
       email: '',
       phone_number: ''
     }
-  }
+
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log( "Props", this.props, "state", this.state)
-    this.props.addUser(this.state)
+    console.log( "Props", this.props)
+    this.props.addUser(this.state, this.props.history)
     this.setState({
       username: '',
       password: '',
@@ -91,20 +90,14 @@ class CreateUserForm extends React.Component {
   }
 }
 
-function mapStatetoProps(state) {
-
-    return {
-      users: state.users
-    }
-}
 
 function mapDispatchToProps(dispatch) {
   return {
-    addUser: (user) => {
-      dispatch(addUser(user))
+    addUser: (user, history) => {
+      dispatch(addUser(user, history))
     }
   }
 
 }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(CreateUserForm)
+export default connect(null, mapDispatchToProps)(CreateUserForm)

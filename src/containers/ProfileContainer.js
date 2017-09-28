@@ -19,7 +19,7 @@ class ProfileContainer extends React.Component {
 
 function mapStatetoProps(state) {
   return {
-    questions: state
+    questions: state.questions
   }
 }
 
