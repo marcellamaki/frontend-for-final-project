@@ -10,7 +10,8 @@ class UserProfileCheckIn extends React.Component {
       currentUser: this.props.currentUser,
       questions: this.props.questions,
       reminders: this.props.reminders,
-      answeredQuestions: {}
+      answeredQuestions: {}, 
+      needsReminder: []
     }
   }
 
@@ -24,12 +25,18 @@ class UserProfileCheckIn extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log("submitting")
-    const data = this.state.answeredQuestions
-    console.log(data)
-    this.props.saveUserQuestions(data)
+    // console.log("submitting")
+    const responses = this.state.answeredQuestions
+    let needsReminder = Object.keys(responses).map(function(key, index) {
+      if (responses[key] === 'false'){
+        return parseInt(key)
+      }
+    }).filter(Boolean);
+    console.log(needsReminder)
+    this.props.saveUserQuestions(needsReminder)
     this.setState({
-      answeredQuestions: {}
+      answeredQuestions: {},
+      needsReminder: needsReminder
     })
 
   }
