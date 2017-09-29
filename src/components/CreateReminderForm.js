@@ -9,8 +9,7 @@ class CreateReminderForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.updateReminder()
-    this.props.updateReminderTime()
+    this.props.addReminder()
   }
 
   render() {

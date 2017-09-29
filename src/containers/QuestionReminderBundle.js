@@ -77,15 +77,23 @@ class QuestionReminderBundle extends React.Component {
   }
 
 
+
   render() {
-    console.log(this.props)
-    if (!this.props.questions) {
+    // this.fetchQuestionList()
+    console.log(this.state.allQuestions)
+    if (this.props.questions === undefined || this.props.questions.length === 0) {
       return <div>Loading...</div>
     } else {
+      console.log(this.props.questions)
+      const currentUserQuestions = this.props.questions.map((question, index) => <QuestionDropdown question={question} key={index}/>)
      return(
        <div>
-         <form>
-           <QuestionDropdown currentUser={this.props.currentUser} questions={this.props.questions} reminders={this.props.reminders}/>
+         <AddQuestionForm text={this.state.checkInText} handleChange={this.handleChange} handleSubmit={this.handleCheckInSubmit}/>
+         <form onChange={this.handleDropdownChange}>
+           <select>
+             <option value="">My Check-Ins</option>
+             {currentUserQuestions}
+           </select>
          </form>
          <AddReminderForm reminderText={this.state.reminderText} reminderTime={this.state.reminderTime} handleReminderChange={this.updateReminder} handleReminderTimeChange={this.updateReminderTime} handleSubmit={this.handleFormSubmit} />
        </div>

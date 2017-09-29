@@ -10,7 +10,7 @@ class UserProfileCheckIn extends React.Component {
       currentUser: this.props.currentUser,
       questions: this.props.questions,
       reminders: this.props.reminders,
-      answeredQuestions: {}, 
+      answeredQuestions: {},
       needsReminder: []
     }
   }
@@ -32,6 +32,7 @@ class UserProfileCheckIn extends React.Component {
         return parseInt(key)
       }
     }).filter(Boolean);
+    needsReminder.push(this.props.currentUser.id)
     console.log(needsReminder)
     this.props.saveUserQuestions(needsReminder)
     this.setState({
