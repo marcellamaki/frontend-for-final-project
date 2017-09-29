@@ -18,9 +18,9 @@ class CreateReminderForm extends React.Component {
       <div>
         <form className="form" onSubmit={this.handleSubmit}>
           <label>When my answer indicates that I'm not doing well and need a little help, please use the following reminder: </label>
-            <input type="text" name="confirm-password" placeholder="Reminder" value={this.props.reminder} onChange={this.props.updateReminder}/> <br></br><br></br>
+            <input type="text" name="reminder" placeholder="Reminder" value={this.props.reminder} onChange={this.props.updateReminder}/> <br></br><br></br>
           <label>Please include the time of day you would like to receive this reminder in 24:00 time. For example, 7:15 P.M. would be 19:15.  </label>
-            <input type="text" name="email" placeholder="HH:MM" value={this.props.reminderTime} onChange={this.props.updateReminderTime}/><br></br><br></br>
+            <input id="time" type="time" name="reminderTime" value={this.props.reminderTime} onChange={this.props.updateReminderTime}/><br></br><br></br>
             <br></br>
             <input type="submit" name="submit" value="Add Reminder"/>
         </form><br></br><br></br>

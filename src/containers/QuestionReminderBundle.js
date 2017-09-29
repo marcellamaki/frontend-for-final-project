@@ -48,6 +48,7 @@ class QuestionReminderBundle extends React.Component {
   updateReminderTime = (event) => {
     console.log("changing reminderTime")
     const reminderTime = event.target.value
+    console.log(reminderTime)
     this.setState({
       reminderTime: reminderTime
     })
@@ -61,7 +62,8 @@ class QuestionReminderBundle extends React.Component {
     const data = {
       question_id: this.state.selectedCheckIn,
       active: true,
-      message: this.state.reminderText
+      message: this.state.reminderText,
+      time: this.state.reminderTime
     }
     this.props.addReminder(data)
   }
