@@ -44,26 +44,33 @@ class UserProfileCheckIn extends React.Component {
 
 
   render(){
-    // console.log(this.state)
     const quizQuestions = !!this.state.questions ? this.state.questions.map((question, index) =>
-    <div key={index}>
-      <label>{question.text}
-        <input type="radio" name={question.id} value="true" onClick={this.handleChange}/> True
-        <input type="radio" name={question.id} value="false" onClick={this.handleChange}/> False<br></br>
-      </label>
+    <div key={index} className="container">
+      <table>
+      <tr>
+        <td className="checkin-column"><label>{question.text}</label></td>
+        <td className="true-column"><input type="radio" name={question.id} value="true" onClick={this.handleChange}/> True</td>
+        <td className="false-column"><input type="radio" name={question.id} value="false" onClick={this.handleChange}/> False<br></br></td>
+      </tr>
+    </table>
     </div>
     ) : ""
     // console.log(quizQuestions)
+    if (this.props.questions === undefined || this.props.questions.length === 0) {
+      return <div>Loading...</div> }
+      else {
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
         {quizQuestions}
-        <input type="submit" value="Save My Responses"/>
+        <br></br>
+        <center><input className="button" type="submit" value="Save My Responses"/></center>
         </form>
+        <br></br><br></br>
       </div>
     )
   }
-
+}
 }
 
 function mapDispatchToProps(dispatch) {

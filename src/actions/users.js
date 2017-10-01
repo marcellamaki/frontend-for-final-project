@@ -40,7 +40,7 @@ export function findUser(data, history) {
         console.log("Found User!")
       dispatch({type: "FIND_USER", payload: user})
     }})
-    // .then((redirect) => history.history.push('/profile'))
+    .then((redirect) => history.history.push('/profile'))
     // console.log(history)
   }
 }

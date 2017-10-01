@@ -7,19 +7,19 @@ import { Route } from 'react-router-dom';
 import LoginForm from './components/LoginForm.js'
 import ProfileContainer from './containers/ProfileContainer';
 import authorize from './components/hocs/authorize';
-// import fetchUser from './actions/users.js'
 import NavBar from './components/NavBar.js'
 import {fetchUser}  from './actions/users'
 import { connect } from 'react-redux';
-import Auth from './adapters/auth.js'
-import { fetchQuestions } from './actions/questions'
+import Auth from './adapters/auth.js';
+import { fetchQuestions } from './actions/questions';
+import Welcome from './components/welcome.js';
+import Logout from './components/logout.js'
 
 
 class App extends Component {
 
 
   componentWillMount() {
-    // console.log(jwt_decode(localStorage.getItem('token')))
     if(!!localStorage.getItem("token") && Object.keys(this.props.currentUser).length == 0) {
       this.props.fetchUser()
       console.log(this.props.currentUser)
@@ -42,12 +42,14 @@ class App extends Component {
   render() {
     const AuthProfile = authorize(ProfileContainer)
     return (
-      <div>
+      <div className="container">
         <Route path='/' render={() => <NavBar />} />
+        <Route exact path='/' render={() => <Welcome />} />
         <Route path='/login' render={(history) => <LoginForm history={history}/>} />
         <Route path='/signup' render={(history) => <CreateUserForm history={history}/>} />
         <Route path='/questions/new' render={() => <QuestionReminderBundle />} />
         <Route path='/profile' component={AuthProfile}/>
+        <Route path='/logout' render={(history) => <Logout history={history}/>} />
       </div>
     );
   }

@@ -22,7 +22,6 @@ ReactDOM.render(
         <Router>
           <div>
             <App />
-            <Route exact path='/' component={Welcome} />
           </div>
         </Router>
     </Provider>,

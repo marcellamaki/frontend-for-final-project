@@ -5,11 +5,11 @@ function usersReducer(state = {allUsers: [], currentUser: {}}, action) {
   switch (action.type) {
     case "ADD_USER":
       localStorage.setItem('token', action.payload.jwt)
-      const obj = Object.assign({}, state, {allUsers: [...state.list, action.payload]})
+      console.log(state)
+      const obj = Object.assign({}, state, {allUsers: [...state.allUsers, action.payload]})
       // console.log (obj)
       return obj
     case "FIND_USER":
-        console.log("payload", action.payload)
         localStorage.setItem('token', action.payload.jwt)
         const currentUser = Object.assign({}, state, {currentUser: action.payload.user})
         console.log(currentUser)

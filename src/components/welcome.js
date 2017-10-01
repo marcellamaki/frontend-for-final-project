@@ -7,9 +7,17 @@ class Welcome extends React.Component {
 
   render(){
     return(
-      <div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vitae porta risus. Fusce consectetur in sem eget semper. Donec ac magna vitae nisl molestie posuere sed et odio. Sed mollis, nunc volutpat lacinia bibendum, dui nulla tincidunt orci, ut rhoncus urna mauris vitae lorem. Donec varius elit non semper tempor. Fusce eget tristique lorem. Pellentesque viverra dui nibh, in fringilla orci commodo at. In gravida tempor nulla, ac egestas mi auctor in. Vivamus lacinia aliquam urna, ut porta justo. Praesent tincidunt pellentesque ante pulvinar tempor. In vitae nunc non felis aliquet viverra. Vivamus placerat tortor sed turpis fringilla, vitae fringilla mauris semper.</p>
-        <button><Link to="/login">Log In</Link></button>OR<button><Link to="/signup">Sign Up</Link></button>
+      <div className="container">
+        <div className="site-title">
+          <h2>Welcome to ---- </h2>
+        </div>
+        <p>
+          ---- is an app that helps you take care of yourself when it's hard to remember how or why it's important. --- helps you stay independent and keep yourself on track when you may not have or want someone else in your support system keeping an eye on how things are going day-to-day.</p>
+        <p>
+          Using ---- is easy: setup is straight-forward and customizable. Start by setting up a series of check-ins that are important and helpful for you. A checkin can be anything that you struggle with remembering to do when you're not doing so well, whether it's leaving the house, eating healthy meals, exercise, spending time with others, taking medication, or even basic things like showering and leaving for work or school on time. </p>
+          <p>
+          Once you've added your check-ins, set reminders to go along with them. Each reminder consists of a message that gets texted to you from ----, and a time of day that it makes sense to receive. For example, if you often forget to have lunch, you can set a message for 12:30, reminding you to get something to eat.
+        </p>
       </div>
     )
   }

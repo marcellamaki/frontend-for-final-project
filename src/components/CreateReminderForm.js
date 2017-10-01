@@ -22,9 +22,9 @@ class CreateReminderForm extends React.Component {
           <label>Please include the time of day you would like to receive this reminder in 24:00 time. For example, 7:15 P.M. would be 19:15.  </label>
             <input id="time" type="time" name="reminderTime" value={this.props.reminderTime} onChange={this.props.updateReminderTime}/><br></br><br></br>
             <br></br>
-            <input type="submit" name="submit" value="Add Reminder"/>
+            <input type="submit" className="button" value="Add Reminder"/>
         </form><br></br><br></br>
-        <h3>My Remind</h3>
+        <h3>My Reminders</h3>
       </div>
     );
   }

@@ -1,20 +1,130 @@
-.App {
-  text-align: center;
+
+body {
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.25em;
+  background: -webkit-gradient(linear, left top, left bottom, from(#cce6ff), to(#cbccc8)) fixed;
+
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+p {
+  margin: 0 0 10px 0;
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 20px;
+  font-weight:100;
+  padding: 15px;
 }
-
-.welcome {
+@media screen and (max-width: 480px) {
+  p {
   font-size: 14px;
-  padding: 20px;
+  }
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+button {
+  padding:3px;
+  margin: 10px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+header {
+  margin: 50px 0;
+  font-family: 'Vidaloka', serif;
+}
+@media screen and (max-width: 480px) {
+  .header {
+    margin:50px 0;
+  }
+}
+
+.site-title {
+  display: block;
+  text-align: right;
+  margin-right:100px;
+  font-size: 40px;
+  text-decoration: none;
+  font-family: 'Cormorant', serif;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 480px) {
+  .site-title {
+    display: block;
+    text-align: center;
+    font-weight: 100;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.nav {
+  text-align: center;
+  padding-bottom: 25px;
+}
+
+a:hover,
+a:active {
+  color: rgba(0, 0, 0, 0.8);
+  transition: 0.6s;
+}
+
+
+@media screen and (max-width: 480px) {
+  .nav {
+    text-align: center;
+  }
+}
+
+a {
+  text-align: right;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+  padding: 10px 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin: 25px;
+  transition: color 0.5s ease;
+
+}
+
+@media screen and (max-width: 480px) {
+  a {
+  text-align: right;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+  padding: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+}
+
+
+.login {
+  margin:100px;
+}
+
+
+.logout{
+  display: block;
+  text-align: center;
+  margin-right:100px;
+  font-size: 40px;
+  text-decoration: none;
+  font-family: 'Cormorant', serif;
+  color: rgba(0, 0, 0, 0.3);
+  margin:75px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    bottom-border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    width: 45%;
 }

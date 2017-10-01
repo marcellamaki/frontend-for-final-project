@@ -35,16 +35,16 @@ class LoginForm extends React.Component {
       passwordInput: event.target.value
     })
   }
-  
+
   render() {
     return (
-      <div>
+      <center><div className="login">
         <form onSubmit={this.handleSubmit}>
-          <input type="text" onChange={this.handleUsernameChange} value={this.state.usernameInput}/><br></br>
-          <input type="password" onChange={this.handlePasswordChange} value={this.state.passwordInput} /><br></br>
+          <input type="text" onChange={this.handleUsernameChange} value={this.state.usernameInput} placeholder="Username"/><br></br>
+          <input type="password" onChange={this.handlePasswordChange} value={this.state.passwordInput} placeholder="Password"/><br></br>
           <input type="submit" value="Login"/>
         </form>
-      </div>
+      </div></center>
     )
   }
 };
