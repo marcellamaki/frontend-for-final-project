@@ -10,8 +10,6 @@ class UserProfileCheckIn extends React.Component {
       currentUser: this.props.currentUser,
       questions: this.props.questions,
       reminders: this.props.reminders,
-      answeredQuestions: {},
-      needsReminder: []
     }
   }
 
@@ -47,15 +45,15 @@ class UserProfileCheckIn extends React.Component {
     const quizQuestions = !!this.state.questions ? this.state.questions.map((question, index) =>
     <div key={index} className="container">
       <table>
-      <tr>
-        <td className="checkin-column"><label>{question.text}</label></td>
-        <td className="true-column"><input type="radio" name={question.id} value="true" onClick={this.handleChange}/> True</td>
-        <td className="false-column"><input type="radio" name={question.id} value="false" onClick={this.handleChange}/> False<br></br></td>
-      </tr>
+            <tr>
+            <td className="checkin-column"><label>{question.text}</label></td>
+            <td className="edit-column">Edit</td>
+            <td className="delete-column">Delete</td>
+          </tr>
     </table>
     </div>
     ) : ""
-    // console.log(quizQuestions)
+     console.log(quizQuestions)
     if (this.props.currentUser === undefined) {
       return <div>Loading...</div> }
       else {
@@ -81,6 +79,15 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
+function mapStatetoProps(state) {
+  console.log(state)
+  return {
+    currentUser: state.users.currentUser,
+    questions: state.users.userQuestions,
+    reminders: state.users.userReminders
+
+  }
+}
 
 
-export default connect(null, mapDispatchToProps)(UserProfileCheckIn)
+export default connect(mapStatetoProps, mapDispatchToProps)(UserProfileCheckIn)

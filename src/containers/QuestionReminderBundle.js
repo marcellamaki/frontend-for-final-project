@@ -7,6 +7,7 @@ import QuestionDropdown from '../components/QuestionDropdown';
 import { addQuestion } from '../actions/questions';
 import { addReminder} from '../actions/reminders';
 import Select from 'react-select';
+import AddOrSelectQuestion from '../components/addOrSelectQuestion.js'
 
 
 class QuestionReminderBundle extends React.Component {
@@ -16,13 +17,14 @@ class QuestionReminderBundle extends React.Component {
 
     this.state = {
       checkInText: '',
-      allQuestions: [],
       reminderText: '',
       reminderTime: '',
       selectedCheckIn: '',
-      answer: true
+      answer: true,
+      question: ''
     }
   }
+
 
   handleChange = (event) => {
     this.setState({
@@ -60,12 +62,18 @@ class QuestionReminderBundle extends React.Component {
     console.log("Starting to submit")
     event.preventDefault()
     const data = {
-      question_id: this.state.selectedCheckIn,
+      text: this.state.checkInText,
+      user_id: this.props.currentUser.id,
+      question_id: this.props.mostRecentQuestionId,
       active: true,
       message: this.state.reminderText,
       time: this.state.reminderTime
     }
     this.props.addReminder(data)
+    this.setState({
+      reminderTime: '',
+      reminderText: '',
+    })
   }
 
 
@@ -75,42 +83,51 @@ class QuestionReminderBundle extends React.Component {
       text: this.state.checkInText,
       user_id: this.props.currentUser.id
     }
+    // debugger
     this.props.addQuestion(data)
+    // console.log(newQuestion)
+    this.setState({
+      question: this.state.checkInText
+    })
   }
 
 
 
   render() {
-    // this.fetchQuestionList()
-    console.log(this.state.allQuestions)
-    if (this.props.questions === undefined || this.props.questions.length === 0) {
-      return <div>Loading...</div>
+    console.log("most recent", this.props.mostRecentQuestionId)
+    if (this.props.currentUser === undefined) {
+      return
+      <div>Loading...</div>
     } else {
-      console.log(this.props.questions)
-      const currentUserQuestions = this.props.questions.map((question, index) => <QuestionDropdown question={question} key={index}/>)
-     return(
-       <div>
-         <AddQuestionForm text={this.state.checkInText} handleChange={this.handleChange} handleSubmit={this.handleCheckInSubmit}/>
-         <form onChange={this.handleDropdownChange}>
-           <select>
-             <option value="">My Check-Ins</option>
-             {currentUserQuestions}
-           </select>
-         </form>
-         <AddReminderForm reminderText={this.state.reminderText} reminderTime={this.state.reminderTime} handleReminderChange={this.updateReminder} handleReminderTimeChange={this.updateReminderTime} handleSubmit={this.handleFormSubmit} />
-       </div>
-     )
-   }
+
+        // debugger
+        if (!!this.state.question) {
+         return(
+           <div>
+             <br></br>
+             <h2>Check-In: {this.state.question}</h2>
+              <h3>Now, add a reminder to go along with it</h3>
+             <AddReminderForm reminderText={this.state.reminderText} reminderTime={this.state.reminderTime} handleReminderChange={this.updateReminder} handleReminderTimeChange={this.updateReminderTime} handleSubmit={this.handleFormSubmit} />
+           </div>
+         )
+       } else {
+         console.log(this.props.questions)
+         return (
+            <AddQuestionForm text={this.state.checkInText} handleChange={this.handleChange} handleSubmit={this.handleCheckInSubmit}/>
+         )
+     }
+    }
 }
 }
 
 
 function mapStatetoProps(state) {
-  // console.log(state)
+  console.log(state)
     return {
       currentUser: state.users.currentUser,
       questions: state.users.userQuestions,
-      reminders: state.users.userReminders
+      reminders: state.users.userReminders,
+      mostRecentQuestionId: state.question.mostRecent
     }
 }
 

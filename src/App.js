@@ -3,7 +3,7 @@ import './App.css';
 import CreateUserForm from './components/CreateUserForm.js'
 import QuestionReminderBundle from './containers/QuestionReminderBundle.js'
 import { withRouter } from 'react-router';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import LoginForm from './components/LoginForm.js'
 import ProfileContainer from './containers/ProfileContainer';
 import authorize from './components/hocs/authorize';
@@ -14,6 +14,7 @@ import Auth from './adapters/auth.js';
 import { fetchQuestions } from './actions/questions';
 import Welcome from './components/welcome.js';
 import Logout from './components/logout.js'
+import EditCheckins from './components/EditCheckins.js'
 
 
 class App extends Component {
@@ -50,6 +51,7 @@ class App extends Component {
         <Route path='/questions/new' render={() => <QuestionReminderBundle />} />
         <Route path='/profile' component={AuthProfile}/>
         <Route path='/logout' render={(history) => <Logout history={history}/>} />
+        <Route path='/questions/edit' render={() => <EditCheckins />} />
       </div>
     );
   }

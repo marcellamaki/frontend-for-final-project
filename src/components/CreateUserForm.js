@@ -65,24 +65,32 @@ class CreateUserForm extends React.Component {
     // console.log(this.props)
     return(
       <div>
-        <h3>This application works by getting in touch with you to check in.</h3>
-        <h4>Get started by creating an account and adding a little bit of information about the best way to contact you.</h4>
         <form className="form" onSubmit={this.handleSubmit}>
-          <p>Account Details</p>
+          <h2>This application works by getting in touch with you to check in.</h2>
+          <h3>Get started by creating an account and adding a little bit of information about the best way to contact you.</h3>
+          <h4>Account Details</h4>
           <label>Username: </label>
-            <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.updateUsername}/>
+            <input type="text" name="username" required="required" placeholder="Username" value={this.state.username} onChange={this.updateUsername}/><br></br>
           <label>Password: </label>
-            <input type="text" name="password" placeholder="Password" value={this.state.password} onChange={this.updatePassword}/>
+            <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.updatePassword}/><br></br>
           <label>Confirm Password: </label>
-            <input type="text" name="confirm-password" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.updateConfirmPassword}/>
-          <p>Contact Information</p>
-          <p>Please be sure you feel comfortable receiving updates at the phone number and email address you provide. Also, please be sure to input a phone number that can receive SMS messages.</p>
+            <input type="password" name="confirm-password" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.updateConfirmPassword}/>
+            <br></br>
+          <h4>Contact Information</h4>
+          Please be sure you feel comfortable receiving updates at the phone number and email address you provide.
+          <br></br>
+          Also, please be sure to input a phone number that can receive SMS messages.
+          <br></br>
+          <br></br>
           <label>Email Address: </label>
-            <input type="text" name="email" placeholder="Email Address" value={this.state.email} onChange={this.updateEmail}/>
+            <input type="email" name="email" placeholder="email@email.com" value={this.state.email} onChange={this.updateEmail}/>
+            <br></br>
           <label>Phone Number: </label>
-            <input type="text" name="phone" placeholder="Phone Number" value={this.state.phone} onChange={this.updatePhone}/>
+            <input type="text" name="phone" placeholder="xxx-xxx-xxxx" value={this.state.phone} pattern="^\d{3}-\d{3}-\d{4}$" onChange={this.updatePhone}/>
+            <br></br>
             <br></br>
           <input type="submit"></input>
+
         </form>
       </div>
     );

@@ -9,7 +9,7 @@ class NavBar extends React.Component {
           <p>
             <a href="/profile" className="navLink">Profile</a>
             •
-            <a href="/questions/edit" className="navLink">Edit Questions</a>
+            <a href="/questions/edit" className="navLink">Edit Check-Ins</a>
             •
             <a href="/questions/new" className="navLink">Add Check-Ins and Reminders</a>
             •

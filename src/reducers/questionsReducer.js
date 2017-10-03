@@ -1,8 +1,8 @@
-function questionsReducer(state = {listS: []}, action) {
-
+function questionsReducer(state = {list: [], questions: [], mostRecent: []}, action) {
   switch (action.type) {
     case "ADD_QUESTION":
-      return Object.assign({}, state, {list: [...state.questions, action.payload]})
+      // debugger
+      return Object.assign({}, state, {list: [...state.questions, action.payload], mostRecent: action.payload.id})
     case "SET_QUESTION_LIST":
       console.log("setting question list")
       return Object.assign({}, state, {list: action.payload})

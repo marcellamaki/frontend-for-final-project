@@ -1,7 +1,7 @@
 
 body {
   color: rgba(0, 0, 0, 0.7);
-  line-height: 1.25em;
+  line-height: 1.5em;
   background: -webkit-gradient(linear, left top, left bottom, from(#cce6ff), to(#cbccc8)) fixed;
 
 }
@@ -11,7 +11,6 @@ p {
   color: rgba(0, 0, 0, 0.55);
   font-size: 20px;
   font-weight:100;
-  padding: 15px;
 }
 @media screen and (max-width: 480px) {
   p {
@@ -21,13 +20,22 @@ p {
 
 .container {
   max-width: 900px;
-  margin: 0 auto;
+  margin-top: 50px;
+  margin: auto;
 }
+
 
 button {
   padding:3px;
   margin: 10px;
   color: rgba(0, 0, 0, 0.7);
+}
+
+form {
+  margin: 0 0 10px 0;
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 20px;
+  font-weight:100;
 }
 
 header {
@@ -43,7 +51,7 @@ header {
 .site-title {
   display: block;
   text-align: right;
-  margin-right:100px;
+  margin-right:50px;
   font-size: 40px;
   text-decoration: none;
   font-family: 'Cormorant', serif;
@@ -62,7 +70,7 @@ header {
 
 .nav {
   text-align: center;
-  padding-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 a:hover,
@@ -127,4 +135,13 @@ td, th {
     text-align: left;
     padding: 8px;
     width: 45%;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
 }

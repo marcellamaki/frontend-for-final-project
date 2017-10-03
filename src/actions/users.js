@@ -17,7 +17,7 @@ export function addUser(data, history) {
         console.log("Added User!")
       dispatch({type: "ADD_USER", payload: user}, history)
     }})
-    // .then((redirect) => history.history.push('/questions/new'))
+    history.history.push('/intro')
   }
 }
 
@@ -40,7 +40,7 @@ export function findUser(data, history) {
         console.log("Found User!")
       dispatch({type: "FIND_USER", payload: user})
     }})
-    .then((redirect) => history.history.push('/profile'))
+    history.history.push('/profile')
     // console.log(history)
   }
 }
@@ -64,6 +64,8 @@ export function fetchUser() {
 
 
 export function saveUserQuestions(data) {
+  console.log(data)
+  // debugger
   return function(dispatch) {
     console.log("I got to save user questions!")
     fetch('http://localhost:3000/api/v1/checkin', {
