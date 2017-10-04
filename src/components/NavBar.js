@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import React, { Component } from 'react';
 
 class NavBar extends React.Component {
@@ -7,7 +8,7 @@ class NavBar extends React.Component {
         <div className="nav">
           { localStorage.getItem("token") ?
           <p>
-            <a href="/profile" className="navLink">Profile</a>
+            <Link to="/profile" className="navLink">Profile</Link>
             •
             <a href="/questions/edit" className="navLink">Edit Check-Ins</a>
             •

@@ -9,7 +9,7 @@ import questionsReducer from './reducers/questionsReducer';
 import remindersReducer from './reducers/remindersReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Welcome from './components/welcome.js'
 // import CreateUserForm from './components/CreateUserForm'
 
@@ -20,9 +20,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk))
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-          <div>
             <App />
-          </div>
         </Router>
     </Provider>,
     document.getElementById('root'));

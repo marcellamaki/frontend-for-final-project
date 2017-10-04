@@ -1,93 +1,58 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { saveUserQuestions} from '../actions/users.js'
+import EditQuestion from './EditQuestion.js'
+import { deleteQuestion } from '../actions/questions.js'
 
-class UserProfileCheckIn extends React.Component {
+class EditCheckins extends React.Component {
   constructor(props){
     super(props)
+    //
+    // this.state = {
+    //   currentUser: this.props.currentUser,
+    //   questions: this.props.questions,
+    // }
+  }
 
-    this.state = {
-      currentUser: this.props.currentUser,
-      questions: this.props.questions,
-      reminders: this.props.reminders,
+  handleDelete = (event) => {
+    console.log(this.props)
+    let questionId = event.target.id
+    console.log("reached handleDelete")
+    this.props.deleteQuestion(questionId)
+  }
+
+  render(){
+    console.log(this.props.questions)
+    if (this.props.questions === undefined) {
+      return <div>Loading...</div> }
+      else {
+        const questions = this.props.questions.map((question, index) => <EditQuestion key={index} question={question} handleDelete={this.handleDelete}/>)
+        return(
+          <div>
+          {questions}
+          </div>
+        )
+      }
     }
   }
 
-  handleChange = (event) => {
-    const questionID = event.target.name
-    const questionResponse = event.target.value
-    // console.log("question id", questionID, "question response", questionResponse)
-    this.state.answeredQuestions[`${questionID}`] = `${questionResponse}`
-    console.log(this.state.answeredQuestions)
+  function mapStatetoProps(state) {
+    console.log(state)
+    return {
+      currentUser: state.users.currentUser,
+      questions: state.users.userQuestions,
+      reminders: state.users.userReminders, 
+
+    }
   }
-
-  handleSubmit = (event) => {
-    event.preventDefault()
-    // console.log("submitting")
-    const responses = this.state.answeredQuestions
-    let needsReminder = Object.keys(responses).map(function(key, index) {
-      if (responses[key] === 'false'){
-        return parseInt(key)
-      }
-    }).filter(Boolean);
-    needsReminder.push(this.props.currentUser.id)
-    console.log(needsReminder)
-    this.props.saveUserQuestions(needsReminder)
-    this.setState({
-      answeredQuestions: {},
-      needsReminder: needsReminder
-    })
-
-  }
-
-
-  render(){
-    const quizQuestions = !!this.state.questions ? this.state.questions.map((question, index) =>
-    <div key={index} className="container">
-      <table>
-            <tr>
-            <td className="checkin-column"><label>{question.text}</label></td>
-            <td className="edit-column">Edit</td>
-            <td className="delete-column">Delete</td>
-          </tr>
-    </table>
-    </div>
-    ) : ""
-     console.log(quizQuestions)
-    if (this.props.currentUser === undefined) {
-      return <div>Loading...</div> }
-      else {
-    return(
-      <div>
-        <form onSubmit={this.handleSubmit}>
-        {quizQuestions}
-        <br></br>
-        <center><input className="button" type="submit" value="Save My Responses"/></center>
-        </form>
-        <br></br><br></br>
-      </div>
-    )
-  }
-}
-}
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveUserQuestions: (data) => {
-      dispatch(saveUserQuestions(data))
+    deleteQuestion: (question) => {
+      dispatch(deleteQuestion(question))
     }
   }
 }
 
-function mapStatetoProps(state) {
-  console.log(state)
-  return {
-    currentUser: state.users.currentUser,
-    questions: state.users.userQuestions,
-    reminders: state.users.userReminders
 
-  }
-}
-
-
-export default connect(mapStatetoProps, mapDispatchToProps)(UserProfileCheckIn)
+export default connect(mapStatetoProps, mapDispatchToProps)(EditCheckins)

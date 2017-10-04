@@ -122,7 +122,7 @@ class QuestionReminderBundle extends React.Component {
 
 
 function mapStatetoProps(state) {
-  console.log(state)
+  console.log(state.question.mostRecent)
     return {
       currentUser: state.users.currentUser,
       questions: state.users.userQuestions,

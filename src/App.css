@@ -25,10 +25,15 @@ p {
 }
 
 
-button {
-  padding:3px;
+.button {
+  background-color: white;
+  font-size: 14px;
+  font-family: 'Cormorant', serif;
+  border: none;
+  padding:3px, 10px, 3px, 10px;
   margin: 10px;
   color: rgba(0, 0, 0, 0.7);
+  text-transform: uppercase;
 }
 
 form {
@@ -40,7 +45,7 @@ form {
 
 header {
   margin: 50px 0;
-  font-family: 'Vidaloka', serif;
+  font-family: 'Cormorant', serif;
 }
 @media screen and (max-width: 480px) {
   .header {

@@ -42,13 +42,15 @@ class App extends Component {
 
   render() {
     const AuthProfile = authorize(ProfileContainer)
+    const AuthNav = authorize(NavBar)
+    const AuthQuestions = authorize(QuestionReminderBundle)
     return (
       <div className="container">
-        <Route path='/' render={() => <NavBar />} />
+        <Route path='/'  component={AuthNav}/>
         <Route exact path='/' render={() => <Welcome />} />
         <Route path='/login' render={(history) => <LoginForm history={history}/>} />
         <Route path='/signup' render={(history) => <CreateUserForm history={history}/>} />
-        <Route path='/questions/new' render={() => <QuestionReminderBundle />} />
+        <Route path='/questions/new' component={AuthQuestions}/>
         <Route path='/profile' component={AuthProfile}/>
         <Route path='/logout' render={(history) => <Logout history={history}/>} />
         <Route path='/questions/edit' render={() => <EditCheckins />} />
