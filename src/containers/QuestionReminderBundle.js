@@ -7,7 +7,6 @@ import QuestionDropdown from '../components/QuestionDropdown';
 import { addQuestion } from '../actions/questions';
 import { addReminder} from '../actions/reminders';
 import Select from 'react-select';
-import AddOrSelectQuestion from '../components/addOrSelectQuestion.js'
 
 
 class QuestionReminderBundle extends React.Component {
