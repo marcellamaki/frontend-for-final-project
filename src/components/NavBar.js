@@ -10,17 +10,19 @@ class NavBar extends React.Component {
           <p>
             <Link to="/profile" className="navLink">Profile</Link>
             •
-            <a href="/questions/edit" className="navLink">Edit Check-Ins</a>
+            <Link to="/questions/edit" className="navLink">Edit Check-Ins</Link>
             •
-            <a href="/questions/new" className="navLink">Add Check-Ins and Reminders</a>
+            <Link to="/questions/new" className="navLink">Add Check-Ins and Reminders</Link>
             •
-            <a href="/logout" className="navLink">Log Out</a>
+            <Link to="/intro" className="navLink">FAQ</Link>
+            •
+            <Link to="/logout" className="navLink">Log Out</Link>
           </p>
             :
             <p>
-              <a href="/login" className="navLink">Log In</a>
+              <Link to="/login" className="navLink">Log In</Link>
               •
-              <a href="/signup" className="navLink">Sign Up</a>
+              <Link to="/signup" className="navLink">Sign Up</Link>
             </p>
           }
         </div>

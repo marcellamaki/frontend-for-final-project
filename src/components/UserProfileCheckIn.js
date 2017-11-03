@@ -34,7 +34,7 @@ class UserProfileCheckIn extends React.Component {
     }).filter(Boolean);
     needsReminder.push(this.props.currentUser.id)
     console.log(needsReminder)
-    this.props.saveUserQuestions(needsReminder)
+    this.props.saveUserQuestions(needsReminder, this.props.history)
     this.setState({
       answeredQuestions: {},
       needsReminder: needsReminder
@@ -75,8 +75,8 @@ class UserProfileCheckIn extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveUserQuestions: (data) => {
-      dispatch(saveUserQuestions(data))
+    saveUserQuestions: (data, history) => {
+      dispatch(saveUserQuestions(data, history))
     }
   }
 }

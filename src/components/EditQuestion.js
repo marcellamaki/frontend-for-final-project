@@ -2,7 +2,7 @@ import React from 'react'
 
 const EditQuestion = (props) => {
 	// console.log(props)
-	return <div><p>{props.question.text}<button id={props.question.id} onClick={props.handleDelete}>Delete</button></p></div>
+	return <div><p><button id={props.question.id} className="button" onClick={props.handleDelete}>Delete</button>{props.question.text}</p></div>
 
 }
 

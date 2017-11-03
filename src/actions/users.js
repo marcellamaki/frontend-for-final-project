@@ -39,8 +39,7 @@ export function findUser(data, history) {
       } else {
         console.log("Found User!")
       dispatch({type: "FIND_USER", payload: user})
-    }})
-    history.history.push('/profile')
+    }}).then((login) => history.history.push('/profile'))
     // console.log(history)
   }
 }
@@ -57,17 +56,16 @@ export function fetchUser() {
   })
   .then((res) => res.json())
   .then((res) => { dispatch({type: "SET_USER", payload: res})
-      //{id: 12, username: "marce".…}
   })
 }
 }
 
 
-export function saveUserQuestions(data) {
-  console.log(data)
+export function saveUserQuestions(data, history) {
+  console.log("history in users js", history)
   // debugger
   return function(dispatch) {
-    console.log("I got to save user questions!")
+    // console.log("I got to save user questions!")
     fetch('http://localhost:3000/api/v1/checkin', {
       method: 'POST',
       mode: 'cors',
@@ -77,16 +75,18 @@ export function saveUserQuestions(data) {
      }
     })
     .then((res) => res.json())
-    .then( res => console.log(res))
+    .then( res => { dispatch({type: "USER_CHECKEDIN", payload: res})
+  })
+    history.push('/done')
   }
 }
 
-export function deleteUser(user) {
-  return {
-    type: "DELETE_USER",
-    payload: {user}
-  }
-}
+// export function deleteUser(user) {
+//   return {
+//     type: "DELETE_USER",
+//     payload: {user}
+//   }
+// }
 
 
 // , localStorage.setItem('jwt', user.jwt)

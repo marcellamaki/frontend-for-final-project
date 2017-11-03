@@ -1,12 +1,17 @@
 import React from 'react'
 import UserProfileCheckIn from '../components/UserProfileCheckIn'
 import { connect } from 'react-redux';
+import {withRouter, Link} from 'react-router-dom'
 
 
 class ProfileContainer extends React.Component {
   constructor(props){
     super(props)
 
+  }
+
+  componentWillUpdate() {
+    this.render
   }
 
   render(){
@@ -16,10 +21,9 @@ class ProfileContainer extends React.Component {
       <div>
 
         { !!this.props.currentUser ? <div> <h2>Hi, {this.props.currentUser.username}!</h2></div>  :  <div></div>}
-        { this.props.questions === undefined || this.props.questions.length == 0 ? <h4>You don't have any check-ins ready. <br></br><br></br><br></br>
-        <center><a href="/questions/new">Click here to get started. </a></center></h4> :
-        <UserProfileCheckIn currentUser={this.props.currentUser} questions={this.props.questions} reminders={this.props.reminders}/>}
-      </div>
+        { !this.props.questions || this.props.questions.length == 0 ? <h4><center><Link to="/questions/new">Click here to get started. </Link></center></h4> :
+          <UserProfileCheckIn history={this.props.history} currentUser={this.props.currentUser} questions={this.props.questions} reminders={this.props.reminders}/>}
+        </div>
     )
   }
 

@@ -59,21 +59,22 @@ class QuestionReminderBundle extends React.Component {
   // managing submission of child components
 
   handleFormSubmit = (event) => {
-    console.log("Starting to submit")
+    console.log("Starting to submit", this.props.history)
     event.preventDefault()
     const data = {
       text: this.state.checkInText,
       user_id: this.props.currentUser.id,
-      question_id: this.props.mostRecentQuestionId,
+      question_id: this.props.mostRecentQuestionId.id,
       active: true,
       message: this.state.reminderText,
       time: this.state.reminderTime
     }
-    this.props.addReminder(data)
+    this.props.addReminder(data, this.props.history)
     this.setState({
       reminderTime: '',
       reminderText: '',
     })
+
   }
 
 
@@ -85,7 +86,7 @@ class QuestionReminderBundle extends React.Component {
     }
     // debugger
     this.props.addQuestion(data)
-    // console.log(newQuestion)
+
     this.setState({
       question: this.state.checkInText
     })
@@ -94,7 +95,7 @@ class QuestionReminderBundle extends React.Component {
 
 
   render() {
-    console.log("most recent", this.props.mostRecentQuestionId)
+    console.log("props from question bundler", this.props)
     if (this.props.currentUser === undefined) {
       return
       <div>Loading...</div>
@@ -136,8 +137,8 @@ function mapDispatchToProps(dispatch) {
     addQuestion: (question) => {
       dispatch(addQuestion(question))
     },
-    addReminder: (reminder) => {
-        dispatch(addReminder(reminder))
+    addReminder: (reminder, history) => {
+        dispatch(addReminder(reminder, history))
     }
   }
 }

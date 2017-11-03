@@ -14,7 +14,9 @@ import Auth from './adapters/auth.js';
 import { fetchQuestions } from './actions/questions';
 import Welcome from './components/welcome.js';
 import Logout from './components/logout.js'
-import EditCheckins from './components/EditCheckins.js'
+import EditCheckins from './components/EditCheckins.js';
+import Intro from './components/intro.js';
+import Done from './components/Done.js';
 
 
 class App extends Component {
@@ -42,18 +44,19 @@ class App extends Component {
 
   render() {
     const AuthProfile = authorize(ProfileContainer)
-    const AuthNav = authorize(NavBar)
-    const AuthQuestions = authorize(QuestionReminderBundle)
+    // const AuthQuestions = authorize(QuestionReminderBundle)
     return (
       <div className="container">
-        <Route path='/'  component={AuthNav}/>
+        <Route path='/'  render={() => <NavBar />}/>
         <Route exact path='/' render={() => <Welcome />} />
         <Route path='/login' render={(history) => <LoginForm history={history}/>} />
         <Route path='/signup' render={(history) => <CreateUserForm history={history}/>} />
-        <Route path='/questions/new' component={AuthQuestions}/>
+        <Route path='/questions/new' render={(history) => <QuestionReminderBundle history={history} />}/>
         <Route path='/profile' component={AuthProfile}/>
         <Route path='/logout' render={(history) => <Logout history={history}/>} />
         <Route path='/questions/edit' render={() => <EditCheckins />} />
+        <Route path='/intro' component={Intro} />
+        <Route path='/done' component={Done} />
       </div>
     );
   }
@@ -73,4 +76,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(App));
